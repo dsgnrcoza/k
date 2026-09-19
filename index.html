@@ -23,7 +23,7 @@
       </nav>
     </div>
 
-    <a class="btn btn-pill" href="how-it-works.html#contact">Contact</a>
+    <a class="btn btn-pill" href="#contact">Contact</a>
   </header>
 
   <main>
@@ -42,7 +42,7 @@
 
       <div class="hero-screen-mockup" aria-hidden="true">
         <div class="mockup-frame">
-          <img class="mockup-img is-active" src="Assets/Work/placeholder-1.png" alt="" />
+          <img class="mockup-img" src="Assets/Work/placeholder-1.png" alt="" />
           <img class="mockup-img" src="Assets/Work/placeholder-2.png" alt="" />
           <img class="mockup-img" src="Assets/Work/placeholder-3.png" alt="" />
           <img class="mockup-img" src="Assets/Work/placeholder-4.png" alt="" />
@@ -267,6 +267,43 @@
         </div>
       </div>
     </section>
+
+    <section class="contact-section" id="contact">
+      <video class="contact-video" autoplay loop muted playsinline>
+        <source src="Assets/Particles.mp4" type="video/mp4" />
+      </video>
+      <div class="contact-overlay" aria-hidden="true"></div>
+
+      <div class="contact-inner">
+        <div class="contact-info">
+          <h2>Let's start something</h2>
+          <p>
+            Tell us a bit about your project and we'll get back to you within
+            a day. No forms full of jargon, no sales calls before you're ready.
+          </p>
+          <div class="contact-detail">hello@kstudio.com</div>
+          <div class="contact-detail">
+            <a href="#">@kstudio</a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-field">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-pill">Send message</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -298,6 +335,19 @@
     })();
 
     (function () {
+      var form = document.getElementById("contact-form");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var wrapper = form.parentNode;
+        var success = document.createElement("div");
+        success.className = "contact-success";
+        success.innerHTML = "Thanks — we'll be in touch <span>soon</span>.";
+        wrapper.replaceChild(success, form);
+      });
+    })();
+
+    (function () {
       var items = Array.from(document.querySelectorAll(".faq-item"));
       if (!items.length) return;
 
@@ -322,19 +372,24 @@
       if (!video || !mockup || !imgs.length) return;
 
       var SCREEN_START = 5.0;
-      var ITEM_MS = 650;
-      var MORPH_HOLD_MS = 450;
+      var MELT_IN_MS = 1200;
+      var MORPH_HOLD_MS = 550;
+      var ITEM_MS = 1500;
+      var MELT_OUT_MS = 700;
       var running = false;
 
       function runShuffle() {
         running = true;
-        video.pause();
-        video.classList.add("is-hidden");
-        mockup.classList.add("is-visible");
-
         imgs.forEach(function (im) {
           im.classList.remove("is-active");
         });
+        video.classList.add("is-melting-out");
+
+        setTimeout(function () {
+          video.pause();
+        }, 500);
+
+        mockup.classList.add("is-melting-in");
 
         setTimeout(function () {
           var idx = 0;
@@ -353,21 +408,27 @@
               im.classList.toggle("is-active", i === idx);
             });
           }, ITEM_MS);
-        }, MORPH_HOLD_MS);
+        }, MELT_IN_MS + MORPH_HOLD_MS);
       }
 
       function finishShuffle() {
         imgs.forEach(function (im) {
           im.classList.remove("is-active");
         });
+
         setTimeout(function () {
-          mockup.classList.remove("is-visible");
-          video.classList.remove("is-hidden");
-          video.currentTime = 0;
-          video.play();
+          mockup.classList.add("is-melting-out");
+          mockup.classList.remove("is-melting-in");
+
           setTimeout(function () {
-            running = false;
-          }, 600);
+            mockup.classList.remove("is-melting-out");
+            video.classList.remove("is-melting-out", "is-hidden");
+            video.currentTime = 0;
+            video.play();
+            setTimeout(function () {
+              running = false;
+            }, 400);
+          }, MELT_OUT_MS);
         }, MORPH_HOLD_MS);
       }
 
