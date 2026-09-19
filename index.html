@@ -335,6 +335,17 @@
     })();
 
     (function () {
+      var v = document.querySelector(".contact-video");
+      if (!v) return;
+      v.playbackRate = 0.75;
+      v.addEventListener("loadedmetadata", function () {
+        if (v.duration && isFinite(v.duration)) {
+          v.currentTime = Math.random() * v.duration;
+        }
+      });
+    })();
+
+    (function () {
       var form = document.getElementById("contact-form");
       if (!form) return;
       form.addEventListener("submit", function (e) {
