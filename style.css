@@ -316,14 +316,21 @@ ul {
 }
 
 .scroll-icon {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
   color: var(--color-accent);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
-  line-height: 1;
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.scroll-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .scroll-block.is-active .scroll-icon {
@@ -349,6 +356,7 @@ ul {
 .scroll-block-desc {
   display: grid;
   grid-template-rows: 0fr;
+  padding-left: 34px;
   transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -382,6 +390,7 @@ ul {
 }
 
 .scroll-image-wrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   opacity: 0.35;
@@ -402,22 +411,57 @@ ul {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.scroll-image-caption {
+  display: none;
+}
+
 /* Contact */
 
 .contact-section {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12vh 24px;
   background: var(--color-black);
-  padding: 12vh 0 14vh;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.contact-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(1.4) contrast(1.2);
+}
+
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
 .contact-inner {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 24px;
+  width: 100%;
+  max-width: 1040px;
   align-items: start;
+  background: rgba(8, 8, 10, 0.55);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
 }
 
 .contact-info h2 {
@@ -526,26 +570,55 @@ ul {
     padding-bottom: 10vh;
   }
 
-  .sticky-scroll-inner,
-  .contact-inner {
+  .sticky-scroll-inner {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
   .sticky-left {
-    position: relative;
-    top: 0;
-    height: auto;
+    display: none;
   }
 
   .sticky-right {
-    gap: 8vh;
-    padding: 4vh 0;
+    gap: 6vh;
+    padding: 0;
   }
 
   .scroll-image-wrap {
     opacity: 1;
     transform: none;
+  }
+
+  .scroll-image-caption {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 60px 20px 22px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+    border-radius: 0 0 18px 18px;
+  }
+
+  .scroll-image-caption h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-white);
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+
+  .scroll-image-caption p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color-gray);
+    font-size: 0.92rem;
+    line-height: 1.4;
   }
 }
 
