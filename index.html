@@ -10,20 +10,20 @@
 <body>
   <header class="site-header">
     <div class="header-left">
-      <a class="logo" href="/" aria-label="K home">
+      <a class="logo" href="index.html" aria-label="K home">
         <img src="Assets/K Logo White (Transparent, Generated).png" alt="K logo" />
       </a>
 
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="#how-it-works">How it works</a></li>
-          <li><a href="#prices">Prices</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
           <li><a href="#case-studies">Case Studies</a></li>
         </ul>
       </nav>
     </div>
 
-    <a class="btn btn-pill" href="#contact">Contact</a>
+    <a class="btn btn-pill" href="how-it-works.html#contact">Contact</a>
   </header>
 
   <main>
@@ -31,7 +31,6 @@
       <video
         class="hero-video"
         autoplay
-        loop
         muted
         playsinline
         poster="Assets/K Logo Black Background.jpg"
@@ -40,6 +39,16 @@
       </video>
 
       <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-screen-mockup" aria-hidden="true">
+        <div class="mockup-frame">
+          <img class="mockup-img is-active" src="Assets/Work/placeholder-1.png" alt="" />
+          <img class="mockup-img" src="Assets/Work/placeholder-2.png" alt="" />
+          <img class="mockup-img" src="Assets/Work/placeholder-3.png" alt="" />
+          <img class="mockup-img" src="Assets/Work/placeholder-4.png" alt="" />
+          <img class="mockup-img" src="Assets/Work/placeholder-5.png" alt="" />
+        </div>
+      </div>
 
       <div class="hero-content">
         <h1>Everything a studio does,<br />without the studio prices or the waiting.</h1>
@@ -50,5 +59,58 @@
       </div>
     </section>
   </main>
+
+  <script>
+    (function () {
+      var video = document.querySelector(".hero-video");
+      var mockup = document.querySelector(".hero-screen-mockup");
+      var imgs = mockup ? Array.from(mockup.querySelectorAll(".mockup-img")) : [];
+      if (!video || !mockup || !imgs.length) return;
+
+      var SCREEN_START = 5.0;
+      var ITEM_MS = 650;
+      var running = false;
+
+      function runShuffle() {
+        running = true;
+        video.pause();
+        video.classList.add("is-hidden");
+        mockup.classList.add("is-visible");
+
+        var idx = 0;
+        imgs.forEach(function (im, i) {
+          im.classList.toggle("is-active", i === 0);
+        });
+
+        var interval = setInterval(function () {
+          idx++;
+          if (idx >= imgs.length) {
+            clearInterval(interval);
+            setTimeout(finishShuffle, ITEM_MS);
+            return;
+          }
+          imgs.forEach(function (im, i) {
+            im.classList.toggle("is-active", i === idx);
+          });
+        }, ITEM_MS);
+      }
+
+      function finishShuffle() {
+        mockup.classList.remove("is-visible");
+        video.classList.remove("is-hidden");
+        video.currentTime = 0;
+        video.play();
+        setTimeout(function () {
+          running = false;
+        }, 600);
+      }
+
+      video.addEventListener("timeupdate", function () {
+        if (!running && video.currentTime >= SCREEN_START) {
+          runShuffle();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
