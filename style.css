@@ -296,39 +296,63 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
-  opacity: 0.3;
-  transition: opacity 0.5s ease;
 }
 
-.scroll-block.is-active {
-  opacity: 1;
+.scroll-block-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .scroll-icon {
+  display: inline-block;
   color: var(--color-accent);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   line-height: 1;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.scroll-block.is-active .scroll-icon {
+  opacity: 1;
+  transform: none;
 }
 
 .scroll-block h3 {
-  font-family: var(--font-display);
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  letter-spacing: -0.01em;
+  font-size: 1.15rem;
+  color: var(--color-gray-dim);
+  letter-spacing: 0;
+  transition: color 0.35s ease, font-size 0.35s ease;
 }
 
-.scroll-block p {
+.scroll-block.is-active h3 {
+  font-family: var(--font-display);
+  color: var(--color-white);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+
+.scroll-block-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.scroll-block-desc p {
+  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
   color: var(--color-gray);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.5;
   max-width: 440px;
 }
 
-.scroll-block.is-active p {
-  color: var(--color-white);
+.scroll-block.is-active .scroll-block-desc {
+  grid-template-rows: 1fr;
+  margin-top: 12px;
 }
 
 .sticky-right {

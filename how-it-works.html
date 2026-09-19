@@ -16,8 +16,8 @@
 
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="how-it-works.html">How it works</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="index.html#how-it-works">How it works</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
           <li><a href="#case-studies">Case Studies</a></li>
         </ul>
       </nav>
@@ -27,65 +27,6 @@
   </header>
 
   <main>
-    <section class="sticky-scroll" id="how-it-works">
-      <div class="sticky-scroll-inner">
-        <div class="sticky-left">
-          <div class="scroll-block is-active" data-index="0">
-            <span class="scroll-icon">&#8594;</span>
-            <h3>Tell us what you need</h3>
-            <p>
-              Describe the idea, drop in references, or point us at something you
-              already love. No lengthy briefs, no discovery workshops — just tell
-              us where you want to end up.
-            </p>
-          </div>
-
-          <div class="scroll-block" data-index="1">
-            <span class="scroll-icon">&#8594;</span>
-            <h3>We design and build it</h3>
-            <p>
-              A dedicated team turns it around fast, with the same craft you'd
-              expect from a studio — minus the overhead and the weeks of
-              waiting for a first look.
-            </p>
-          </div>
-
-          <div class="scroll-block" data-index="2">
-            <span class="scroll-icon">&#8594;</span>
-            <h3>You launch, we stick around</h3>
-            <p>
-              Ship with confidence. We stay on for tweaks, iterations, and
-              whatever comes next — no re-onboarding a new team every time
-              something changes.
-            </p>
-          </div>
-        </div>
-
-        <div class="sticky-right">
-          <div class="sticky-right-inner">
-            <img
-              class="sticky-image is-active"
-              data-index="0"
-              src="Assets/Work/placeholder-1.png"
-              alt="Concept and direction preview"
-            />
-            <img
-              class="sticky-image"
-              data-index="1"
-              src="Assets/Work/placeholder-2.png"
-              alt="Design and build preview"
-            />
-            <img
-              class="sticky-image"
-              data-index="2"
-              src="Assets/Work/placeholder-3.png"
-              alt="Launch and support preview"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="contact-section" id="contact">
       <div class="contact-inner">
         <div class="contact-info">
@@ -120,33 +61,6 @@
   </main>
 
   <script>
-    (function () {
-      var blocks = Array.from(document.querySelectorAll(".scroll-block"));
-      var images = Array.from(document.querySelectorAll(".sticky-image"));
-      if (!blocks.length || !images.length) return;
-
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var index = entry.target.getAttribute("data-index");
-              blocks.forEach(function (b) {
-                b.classList.toggle("is-active", b === entry.target);
-              });
-              images.forEach(function (im) {
-                im.classList.toggle("is-active", im.getAttribute("data-index") === index);
-              });
-            }
-          });
-        },
-        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-      );
-
-      blocks.forEach(function (b) {
-        observer.observe(b);
-      });
-    })();
-
     (function () {
       var form = document.getElementById("contact-form");
       if (!form) return;
