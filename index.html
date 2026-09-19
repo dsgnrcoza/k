@@ -159,6 +159,114 @@
         </div>
       </div>
     </section>
+
+    <section class="faq-section" id="faq">
+      <div class="faq-inner">
+        <div class="faq-heading">
+          <h2>Frequently asked<br />questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item is-open" data-index="0">
+            <button class="faq-question" type="button">
+              <span>What do you actually build?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Websites, product UI, landing pages, brand systems — anything
+                a studio would normally hand you a proposal and a six week
+                timeline for. We scope it fast and build it fast.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="1">
+            <button class="faq-question" type="button">
+              <span>How fast can we launch?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Most projects go from first message to a live first draft
+                within days, not months. Exact timing depends on scope, but
+                there's no multi-week discovery phase before anything gets
+                built.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="2">
+            <button class="faq-question" type="button">
+              <span>What does it cost?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                A fraction of a traditional studio retainer. Pricing is
+                scoped per project rather than billed by the hour, so you
+                know the number before we start.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="3">
+            <button class="faq-question" type="button">
+              <span>Do I need to know how to code?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                No. Describe what you want in plain language, drop in
+                references or existing assets, and we handle everything from
+                design through to a shipped build.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="4">
+            <button class="faq-question" type="button">
+              <span>Can you work with my existing brand?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Yes — send over your logo, colours, fonts, and any existing
+                pages, and we'll build within that system rather than
+                starting from scratch.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="5">
+            <button class="faq-question" type="button">
+              <span>Is there support after launch?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                We stay on after launch for tweaks, iterations, and whatever
+                comes next — you're not re-onboarding a new team every time
+                something needs to change.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-index="6">
+            <button class="faq-question" type="button">
+              <span>How do we get started?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Hit contact and tell us a bit about the project. We'll reply
+                within a day with next steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -187,6 +295,24 @@
           observer.observe(w);
         });
       }
+    })();
+
+    (function () {
+      var items = Array.from(document.querySelectorAll(".faq-item"));
+      if (!items.length) return;
+
+      items.forEach(function (item) {
+        var question = item.querySelector(".faq-question");
+        question.addEventListener("click", function () {
+          var wasOpen = item.classList.contains("is-open");
+          items.forEach(function (i) {
+            i.classList.remove("is-open");
+          });
+          if (!wasOpen) {
+            item.classList.add("is-open");
+          }
+        });
+      });
     })();
 
     (function () {

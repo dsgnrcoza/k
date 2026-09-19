@@ -362,6 +362,7 @@ ul {
 
 .scroll-block-desc p {
   overflow: hidden;
+  min-height: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: var(--color-gray);
   font-size: 1.02rem;
@@ -413,6 +414,102 @@ ul {
 
 .scroll-image-caption {
   display: none;
+}
+
+/* FAQ */
+
+.faq-section {
+  padding: 10vh 0 14vh;
+}
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: start;
+}
+
+.faq-heading h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.faq-item.is-open {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.02rem;
+  color: var(--color-white);
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-gray);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.is-open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--color-white);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-answer p {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-gray);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 640px;
+  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.is-open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-item.is-open .faq-answer p {
+  padding-bottom: 20px;
 }
 
 /* Contact */
@@ -579,6 +676,11 @@ ul {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 32px 24px;
+  }
+
+  .faq-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .sticky-left {
