@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Studies — K</title>
+  <link rel="icon" type="image/jpeg" href="Assets/K Logo Black Background.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <a class="logo" href="index.html" aria-label="K home">
+        <img src="Assets/K Logo White (Transparent, Generated).png" alt="K logo" />
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="case-studies.html">Case Studies</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <a class="btn btn-pill" href="index.html#contact">Contact</a>
+  </header>
+
+  <main>
+    <section class="page-hero is-centered">
+      <div class="page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">K</a> / Case Studies</div>
+        <h1>Case studies</h1>
+        <p>
+          A look at past work across web design, product UI, and brand —
+          real projects, shipped fast.
+        </p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="content-section-inner">
+        <div class="case-featured-grid">
+          <div class="case-featured-item">
+            <img src="Assets/Work/case-1.png" alt="Nova Studio" />
+            <div class="case-featured-caption">Nova Studio — Web design</div>
+          </div>
+          <div class="case-featured-item">
+            <img src="Assets/Work/case-2.png" alt="Arclight" />
+            <div class="case-featured-caption">Arclight — Product UI</div>
+          </div>
+          <div class="case-featured-item is-wide">
+            <img src="Assets/Work/case-3.png" alt="Fieldnote" />
+            <div class="case-featured-caption">Fieldnote — Full brand system</div>
+          </div>
+        </div>
+
+        <div class="case-toolbar">
+          <h2>Explore work</h2>
+          <div class="case-toolbar-controls">
+            <span class="case-result-count" id="case-count">9 projects</span>
+            <select class="case-filter" id="case-filter" aria-label="Filter by category">
+              <option value="all">All categories</option>
+              <option value="web">Web design</option>
+              <option value="product">Product UI</option>
+              <option value="brand">Branding</option>
+              <option value="ecommerce">E-commerce</option>
+              <option value="marketing">Marketing site</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="case-grid" id="case-grid">
+          <a class="case-card" href="#" data-category="web">
+            <div class="case-card-image"><img src="Assets/Work/case-1.png" alt="Nova Studio" /></div>
+            <h3>Nova Studio</h3>
+            <div class="case-card-tags">Web design</div>
+          </a>
+          <a class="case-card" href="#" data-category="product">
+            <div class="case-card-image"><img src="Assets/Work/case-2.png" alt="Arclight" /></div>
+            <h3>Arclight</h3>
+            <div class="case-card-tags">Product UI</div>
+          </a>
+          <a class="case-card" href="#" data-category="brand">
+            <div class="case-card-image"><img src="Assets/Work/case-3.png" alt="Fieldnote" /></div>
+            <h3>Fieldnote</h3>
+            <div class="case-card-tags">Branding</div>
+          </a>
+          <a class="case-card" href="#" data-category="ecommerce">
+            <div class="case-card-image"><img src="Assets/Work/case-4.png" alt="Kelp & Co" /></div>
+            <h3>Kelp &amp; Co</h3>
+            <div class="case-card-tags">E-commerce</div>
+          </a>
+          <a class="case-card" href="#" data-category="marketing">
+            <div class="case-card-image"><img src="Assets/Work/case-5.png" alt="Monolith" /></div>
+            <h3>Monolith</h3>
+            <div class="case-card-tags">Marketing site</div>
+          </a>
+          <a class="case-card" href="#" data-category="product">
+            <div class="case-card-image"><img src="Assets/Work/case-6.png" alt="Halcyon" /></div>
+            <h3>Halcyon</h3>
+            <div class="case-card-tags">Product UI</div>
+          </a>
+          <a class="case-card" href="#" data-category="brand">
+            <div class="case-card-image"><img src="Assets/Work/case-7.png" alt="Rosette" /></div>
+            <h3>Rosette</h3>
+            <div class="case-card-tags">Branding</div>
+          </a>
+          <a class="case-card" href="#" data-category="web">
+            <div class="case-card-image"><img src="Assets/Work/case-8.png" alt="Fernway" /></div>
+            <h3>Fernway</h3>
+            <div class="case-card-tags">Web design</div>
+          </a>
+          <a class="case-card" href="#" data-category="product">
+            <div class="case-card-image"><img src="Assets/Work/case-9.png" alt="Driftline" /></div>
+            <h3>Driftline</h3>
+            <div class="case-card-tags">Product UI</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var filter = document.getElementById("case-filter");
+      var count = document.getElementById("case-count");
+      var cards = Array.from(document.querySelectorAll(".case-card"));
+      if (!filter || !cards.length) return;
+
+      function apply() {
+        var value = filter.value;
+        var visible = 0;
+        cards.forEach(function (card) {
+          var match = value === "all" || card.getAttribute("data-category") === value;
+          card.classList.toggle("is-hidden", !match);
+          if (match) visible++;
+        });
+        count.textContent = visible + (visible === 1 ? " project" : " projects");
+      }
+
+      filter.addEventListener("change", apply);
+      apply();
+    })();
+  </script>
+</body>
+</html>
