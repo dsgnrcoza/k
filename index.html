@@ -62,66 +62,69 @@
     <section class="sticky-scroll" id="how-it-works">
       <div class="sticky-scroll-inner">
         <div class="sticky-left">
-          <div class="scroll-block is-active" data-index="0">
-            <div class="scroll-block-head">
-              <span class="scroll-icon">&#8594;</span>
-              <h3>Tell us what you need</h3>
+          <div class="sticky-left-inner">
+            <div class="scroll-block is-active" data-index="0">
+              <div class="scroll-block-head">
+                <span class="scroll-icon">&#8594;</span>
+                <h3>Tell us what you need</h3>
+              </div>
+              <div class="scroll-block-desc">
+                <p>
+                  Describe the idea, drop in references, or point us at
+                  something you already love. No lengthy briefs, no discovery
+                  workshops — just tell us where you want to end up.
+                </p>
+              </div>
             </div>
-            <div class="scroll-block-desc">
-              <p>
-                Describe the idea, drop in references, or point us at
-                something you already love. No lengthy briefs, no discovery
-                workshops — just tell us where you want to end up.
-              </p>
-            </div>
-          </div>
 
-          <div class="scroll-block" data-index="1">
-            <div class="scroll-block-head">
-              <span class="scroll-icon">&#8594;</span>
-              <h3>We design and build it</h3>
+            <div class="scroll-block" data-index="1">
+              <div class="scroll-block-head">
+                <span class="scroll-icon">&#8594;</span>
+                <h3>We design and build it</h3>
+              </div>
+              <div class="scroll-block-desc">
+                <p>
+                  A dedicated team turns it around fast, with the same craft
+                  you'd expect from a studio — minus the overhead and the
+                  weeks of waiting for a first look.
+                </p>
+              </div>
             </div>
-            <div class="scroll-block-desc">
-              <p>
-                A dedicated team turns it around fast, with the same craft
-                you'd expect from a studio — minus the overhead and the weeks
-                of waiting for a first look.
-              </p>
-            </div>
-          </div>
 
-          <div class="scroll-block" data-index="2">
-            <div class="scroll-block-head">
-              <span class="scroll-icon">&#8594;</span>
-              <h3>You launch, we stick around</h3>
-            </div>
-            <div class="scroll-block-desc">
-              <p>
-                Ship with confidence. We stay on for tweaks, iterations, and
-                whatever comes next — no re-onboarding a new team every time
-                something changes.
-              </p>
+            <div class="scroll-block" data-index="2">
+              <div class="scroll-block-head">
+                <span class="scroll-icon">&#8594;</span>
+                <h3>You launch, we stick around</h3>
+              </div>
+              <div class="scroll-block-desc">
+                <p>
+                  Ship with confidence. We stay on for tweaks, iterations,
+                  and whatever comes next — no re-onboarding a new team
+                  every time something changes.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="sticky-right">
-          <div class="sticky-right-inner">
+          <div class="scroll-image-wrap" data-index="0">
             <img
-              class="sticky-image is-active"
-              data-index="0"
+              class="sticky-image"
               src="Assets/Work/placeholder-1.png"
               alt="Concept and direction preview"
             />
+          </div>
+          <div class="scroll-image-wrap" data-index="1">
             <img
               class="sticky-image"
-              data-index="1"
               src="Assets/Work/placeholder-2.png"
               alt="Design and build preview"
             />
+          </div>
+          <div class="scroll-image-wrap" data-index="2">
             <img
               class="sticky-image"
-              data-index="2"
               src="Assets/Work/placeholder-3.png"
               alt="Launch and support preview"
             />
@@ -134,21 +137,18 @@
   <script>
     (function () {
       var blocks = Array.from(document.querySelectorAll(".scroll-block"));
-      var images = Array.from(document.querySelectorAll(".sticky-image"));
-      if (blocks.length && images.length) {
+      var imageWraps = Array.from(document.querySelectorAll(".scroll-image-wrap"));
+      if (blocks.length && imageWraps.length) {
         var observer = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting) {
                 var index = entry.target.getAttribute("data-index");
                 blocks.forEach(function (b) {
-                  b.classList.toggle("is-active", b === entry.target);
+                  b.classList.toggle("is-active", b.getAttribute("data-index") === index);
                 });
-                images.forEach(function (im) {
-                  im.classList.toggle(
-                    "is-active",
-                    im.getAttribute("data-index") === index
-                  );
+                imageWraps.forEach(function (w) {
+                  w.classList.toggle("is-active", w === entry.target);
                 });
               }
             });
@@ -156,8 +156,8 @@
           { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
         );
 
-        blocks.forEach(function (b) {
-          observer.observe(b);
+        imageWraps.forEach(function (w) {
+          observer.observe(w);
         });
       }
     })();
@@ -170,6 +170,7 @@
 
       var SCREEN_START = 5.0;
       var ITEM_MS = 650;
+      var MORPH_HOLD_MS = 450;
       var running = false;
 
       function runShuffle() {
@@ -178,32 +179,43 @@
         video.classList.add("is-hidden");
         mockup.classList.add("is-visible");
 
-        var idx = 0;
-        imgs.forEach(function (im, i) {
-          im.classList.toggle("is-active", i === 0);
+        imgs.forEach(function (im) {
+          im.classList.remove("is-active");
         });
 
-        var interval = setInterval(function () {
-          idx++;
-          if (idx >= imgs.length) {
-            clearInterval(interval);
-            setTimeout(finishShuffle, ITEM_MS);
-            return;
-          }
+        setTimeout(function () {
+          var idx = 0;
           imgs.forEach(function (im, i) {
-            im.classList.toggle("is-active", i === idx);
+            im.classList.toggle("is-active", i === 0);
           });
-        }, ITEM_MS);
+
+          var interval = setInterval(function () {
+            idx++;
+            if (idx >= imgs.length) {
+              clearInterval(interval);
+              setTimeout(finishShuffle, ITEM_MS);
+              return;
+            }
+            imgs.forEach(function (im, i) {
+              im.classList.toggle("is-active", i === idx);
+            });
+          }, ITEM_MS);
+        }, MORPH_HOLD_MS);
       }
 
       function finishShuffle() {
-        mockup.classList.remove("is-visible");
-        video.classList.remove("is-hidden");
-        video.currentTime = 0;
-        video.play();
+        imgs.forEach(function (im) {
+          im.classList.remove("is-active");
+        });
         setTimeout(function () {
-          running = false;
-        }, 600);
+          mockup.classList.remove("is-visible");
+          video.classList.remove("is-hidden");
+          video.currentTime = 0;
+          video.play();
+          setTimeout(function () {
+            running = false;
+          }, 600);
+        }, MORPH_HOLD_MS);
       }
 
       video.addEventListener("timeupdate", function () {
