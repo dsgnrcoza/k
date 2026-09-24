@@ -677,8 +677,8 @@ ul {
   width: 110%;
   height: 110%;
   object-fit: cover;
-  z-index: -2;
-  filter: brightness(1.15) contrast(1.15);
+  z-index: -3;
+  filter: brightness(1.15) contrast(1.25) saturate(0);
   animation: particle-drift 40s ease-in-out infinite alternate;
 }
 
@@ -692,6 +692,20 @@ ul {
   100% {
     transform: scale(1.1) translate(1.5%, -1.5%);
   }
+}
+
+.contact-tint {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(
+    circle at 50% 45%,
+    #7d9cff 0%,
+    var(--color-accent) 45%,
+    #1c2a5e 100%
+  );
+  mix-blend-mode: color;
+  opacity: 0.85;
 }
 
 .contact-overlay {
@@ -1376,14 +1390,10 @@ ul {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.92rem;
-  color: var(--color-gray);
 }
 
 .footer-logo img {
-  height: 20px;
+  height: 34px;
   width: auto;
 }
 
